@@ -1,0 +1,24 @@
+{
+  "name": "tvoi-obed-web",
+  "version": "1.0.0",
+  "description": "Web version of 'Your Lunch' application with Discord-like UI",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve .",
+    "dev": "live-server --open=.",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": ["web", "lunch", "menu", "school", "food"],
+  "author": "KrAndAl",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com//my-obed-web.git"
+  },
+  "bugs": {
+    "url": "https://github.com//my-obed-web/issues"
+  },
+  "homepage": "https://github.com//my-obed-web#readme"
+}

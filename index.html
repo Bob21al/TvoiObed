@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Твой Обед</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Custom Top Bar -->
+    <div class="top-bar">
+        <div class="app-title">Твой Обед</div>
+        <div class="hamburger-menu" id="mobile-menu-toggle">☰</div>
+    </div>
+
+    <div class="app-container">
+        <!-- Main sidebar with navigation -->
+        <div class="sidebar-main">
+            <nav class="navigation">
+                <div class="nav-item active" data-page="home">Главная</div>
+                <div class="nav-item" data-page="today">Меню на сегодня</div>
+                <div class="nav-item" data-page="orders">Заказы</div>
+                <div class="nav-item" data-page="my-orders">Мои заказы</div>
+                <div class="nav-item" data-page="favorites">Избранное</div>
+                <div class="nav-item" data-page="settings">Настройки</div>
+            </nav>
+
+            <!-- User profile section -->
+            <div class="profile-section">
+                <div class="user-profile" id="user-profile-clickable">
+                    <div class="avatar"></div>
+                    <div class="user-info">
+                        <div class="username">Ученик</div>
+                        <div class="status">онлайн</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main content area -->
+        <div class="main-content">
+            <!-- Home page content -->
+            <div id="home-page" class="page active">
+                <h1 class="main-title">ТВОЙ ОБЕД</h1>
+                <p class="subtitle">Школьное питание — быстро и удобно</p>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>Меню на сегодня</h3>
+                        <p>Посмотреть доступные блюда</p>
+                    </div>
+                    <div class="card">
+                        <h3>Сделать заказ</h3>
+                        <p>Выбрать и оформить заказ</p>
+                    </div>
+                    <div class="card">
+                        <h3>Акции и новинки</h3>
+                        <p>Специальные предложения</p>
+                    </div>
+                </div>
+
+                <!-- Today's menu widget -->
+               <div class="today-widget">
+                   <h3>Меню на сегодня</h3>
+                   <div class="widget-content">
+                       <div class="dish-item">
+                           <span>Суп</span>
+                           <span class="calories">150 ккал</span>
+                       </div>
+                       <div class="dish-item">
+                           <span>Котлета с пюре</span>
+                           <span class="calories">320 ккал</span>
+                       </div>
+                       <div class="dish-item">
+                           <span>Компот</span>
+                           <span class="calories">80 ккал</span>
+                       </div>
+                       <div class="dish-item">
+                           <span>Булочка</span>
+                           <span class="calories">120 ккал</span>
+                       </div>
+                       <div class="dish-item">
+                           <span>Салат овощной</span>
+                           <span class="calories">100 ккал</span>
+                       </div>
+                   </div>
+               </div>
+
+                <button class="big-button">ОТКРЫТЬ МЕНЮ</button>
+            </div>
+
+            <!-- Menu page content -->
+           <div id="today-page" class="page">
+               <h2>Меню на сегодня</h2>
+               <div class="menu-items">
+                   <div class="menu-card">
+                       <h3>Суп</h3>
+                       <p class="calories">150 ккал</p>
+                       <p class="price">100 ₽</p>
+                       <div class="button-group">
+                           <button class="add-btn">Добавить</button>
+                           <button class="fav-btn" title="Добавить в избранное">★</button>
+                       </div>
+                   </div>
+                   <div class="menu-card">
+                       <h3>Котлета с пюре</h3>
+                       <p class="calories">320 ккал</p>
+                       <p class="price">150 ₽</p>
+                       <div class="button-group">
+                           <button class="add-btn">Добавить</button>
+                           <button class="fav-btn" title="Добавить в избранное">★</button>
+                       </div>
+                   </div>
+                   <div class="menu-card">
+                       <h3>Компот</h3>
+                       <p class="calories">80 ккал</p>
+                       <p class="price">50 ₽</p>
+                       <div class="button-group">
+                           <button class="add-btn">Добавить</button>
+                           <button class="fav-btn" title="Добавить в избранное">★</button>
+                       </div>
+                   </div>
+                   <div class="menu-card">
+                       <h3>Булочка</h3>
+                       <p class="calories">120 ккал</p>
+                       <p class="price">40 ₽</p>
+                       <div class="button-group">
+                           <button class="add-btn">Добавить</button>
+                           <button class="fav-btn" title="Добавить в избранное">★</button>
+                       </div>
+                   </div>
+                   <div class="menu-card">
+                       <h3>Салат овощной</h3>
+                       <p class="calories">100 ккал</p>
+                       <p class="price">70 ₽</p>
+                       <div class="button-group">
+                           <button class="add-btn">Добавить</button>
+                           <button class="fav-btn" title="Добавить в избранное">★</button>
+                       </div>
+                   </div>
+                   <div class="menu-card">
+                       <h3>Каша гречневая</h3>
+                       <p class="calories">200 ккал</p>
+                       <p class="price">90 ₽</p>
+                       <div class="button-group">
+                           <button class="add-btn">Добавить</button>
+                           <button class="fav-btn" title="Добавить в избранное">★</button>
+                       </div>
+                   </div>
+                   <div class="menu-card">
+                       <h3>Чай клубничный</h3>
+                       <p class="calories">5 ккал</p>
+                       <p class="price">30 ₽</p>
+                       <div class="button-group">
+                           <button class="add-btn">Добавить</button>
+                           <button class="fav-btn" title="Добавить в избранное">★</button>
+                       </div>
+                   </div>
+                   <div class="menu-card">
+                       <h3>Чай зелёный</h3>
+                       <p class="calories">5 ккал</p>
+                       <p class="price">30 ₽</p>
+                       <div class="button-group">
+                           <button class="add-btn">Добавить</button>
+                           <button class="fav-btn" title="Добавить в избранное">★</button>
+                       </div>
+                   </div>
+                   <div class="menu-card">
+                       <h3>Чай черный</h3>
+                       <p class="calories">5 ккал</p>
+                       <p class="price">30 ₽</p>
+                       <div class="button-group">
+                           <button class="add-btn">Добавить</button>
+                           <button class="fav-btn" title="Добавить в избранное">★</button>
+                       </div>
+                   </div>
+               </div>
+           </div>
+           
+           <!-- Orders page content -->
+           <div id="orders-page" class="page">
+               <h2>Заказы</h2>
+               <div class="empty-state">
+                   <p>Пока нет заказов</p>
+                   <button class="secondary-btn">Перейти в меню</button>
+               </div>
+               
+               <!-- Order Placement Section -->
+               <div class="order-placement" style="display: none;">
+                   <h3>Оформить заказ</h3>
+                   
+                   <div class="order-options">
+                       <div class="option-group">
+                           <label>Дата:</label>
+                           <div id="calendar-container">
+                               <input type="text" id="order-date" placeholder="Выберите дату" readonly>
+                               <div id="calendar-popup" class="calendar-popup">
+                                   <div class="calendar-header">
+                                       <button id="prev-month"><</button>
+                                       <span id="current-month-year"></span>
+                                       <button id="next-month">></button>
+                                   </div>
+                                   <div id="calendar-grid" class="calendar-grid">
+                                       <div class="calendar-day-header">Пн</div>
+                                       <div class="calendar-day-header">Вт</div>
+                                       <div class="calendar-day-header">Ср</div>
+                                       <div class="calendar-day-header">Чт</div>
+                                       <div class="calendar-day-header">Пт</div>
+                                       <div class="calendar-day-header">Сб</div>
+                                       <div class="calendar-day-header">Вс</div>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                       
+                       <div class="option-group">
+                           <label>Время:</label>
+                           <div class="custom-select" id="time-select-wrapper">
+                               <input type="text" id="order-time" placeholder="Выберите время" readonly>
+                               <div class="custom-select-dropdown" id="time-dropdown">
+                                   <div class="custom-option" data-value="breakfast">Завтрак (8:00-9:00)</div>
+                                   <div class="custom-option" data-value="lunch">Обед (большая перемена) (12:00-13:00)</div>
+                               </div>
+                           </div>
+                       </div>
+                       
+                       <div class="option-group">
+                           <label>Получение:</label>
+                           <div class="custom-select" id="delivery-select-wrapper">
+                               <input type="text" id="delivery-option" placeholder="Выберите способ получения" readonly>
+                               <div class="custom-select-dropdown" id="delivery-dropdown">
+                                   <div class="custom-option" data-value="cafeteria">В столовой</div>
+                                   <div class="custom-option" data-value="takeaway">С собой</div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+                   
+                   <div class="order-summary">
+                       <h4>Состав заказа:</h4>
+                       <div id="order-summary-list">
+                           <!-- Order items will be populated here -->
+                       </div>
+                       <div class="total-calories">
+                           Общая калорийность: <span id="total-calories">0</span> ккал
+                       </div>
+                       <div class="total-price">
+                           Итого: <span id="total-price-value">0</span> ₽
+                       </div>
+                   </div>
+                   
+                   <div class="order-actions">
+                       <button id="cancel-order-btn" class="cancel-order-btn">Отменить заказ</button>
+                       <button id="pay-order-btn" class="pay-order-btn">Оплатить заказ</button>
+                   </div>
+               </div>
+           </div>
+           
+           <!-- My Orders page content -->
+           <div id="my-orders-page" class="page">
+               <h2>Мои заказы</h2>
+               <div id="my-orders-list">
+                   <p>Здесь будут отображаться ваши прошлые заказы</p>
+               </div>
+           </div>
+
+           <!-- Favorites page content -->
+           <div id="favorites-page" class="page">
+               <h2>Избранное</h2>
+               <p>Здесь будут отображаться избранные блюда</p>
+           </div>
+
+           <!-- Profile customization page content -->
+           <div id="profile-page" class="page">
+               <h2>Настройка профиля</h2>
+               <div class="profile-form">
+                   <div class="form-group">
+                       <label for="first-name">Имя</label>
+                       <input type="text" id="first-name" placeholder="Введите ваше имя">
+                   </div>
+                   
+                   <div class="form-group">
+                       <label for="last-name">Фамилия</label>
+                       <input type="text" id="last-name" placeholder="Введите вашу фамилию">
+                   </div>
+                   
+                   <div class="form-group">
+                       <label for="class-select">Класс</label>
+                       <select id="class-select">
+                           <option value="">Выберите класс</option>
+                           <option value="5А">5А</option>
+                           <option value="5Б">5Б</option>
+                           <option value="5В">5В</option>
+                           <option value="6А">6А</option>
+                           <option value="6Б">6Б</option>
+                           <option value="6В">6В</option>
+                           <option value="7А">7А</option>
+                           <option value="7Б">7Б</option>
+                           <option value="7В">7В</option>
+                           <option value="8А">8А</option>
+                           <option value="8Б">8Б</option>
+                           <option value="8В">8В</option>
+                           <option value="9А">9А</option>
+                           <option value="9Б">9Б</option>
+                           <option value="9В">9В</option>
+                           <option value="10А">10А</option>
+                           <option value="10Б">10Б</option>
+                           <option value="10В">10В</option>
+                           <option value="11А">11А</option>
+                           <option value="11Б">11Б</option>
+                           <option value="11В">11В</option>
+                       </select>
+                   </div>
+                   
+                   
+                   <div class="form-group">
+                       <label for="allergies">Аллергии</label>
+                       <textarea id="allergies" placeholder="Укажите ваши пищевые аллергии и ограничения"></textarea>
+                   </div>
+                   
+                   <button id="save-profile-btn" class="big-button">Сохранить профиль</button>
+               </div>
+           </div>
+           
+           <!-- Settings page content -->
+           <div id="settings-page" class="page">
+               <h2>Настройки</h2>
+               <div class="settings-group">
+                   <label class="switch">
+                       <input type="checkbox" checked>
+                       <span class="slider"></span>
+                       Тёмная тема
+                   </label>
+                   <label class="switch">
+                       <input type="checkbox" checked>
+                       <span class="slider"></span>
+                       Уведомления
+                   </label>
+               </div>
+           </div>
+       </div> <!-- Closing main-content div -->
+   </div> <!-- Closing app-container div -->
+
+   <!-- Confirmation Modal outside the main content area to cover the entire window -->
+   <div id="confirmation-modal" class="confirmation-modal">
+       <div class="confirmation-modal-content">
+           <div class="confirmation-modal-header">
+               <h3>Подтверждение оплаты</h3>
+           </div>
+           <div class="confirmation-modal-body" id="confirmation-message">
+               Вы уверены, что хотите произвести оплату?
+           </div>
+           <div class="confirmation-modal-footer">
+               <button id="cancel-confirm-btn" class="confirmation-modal-btn cancel">Отмена</button>
+               <button id="confirm-payment-btn" class="confirmation-modal-btn confirm">Оплатить</button>
+           </div>
+       </div>
+   </div>
+    
+    <script src="js/app.js"></script>
+</body>
+</html>
