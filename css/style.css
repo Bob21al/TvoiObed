@@ -136,30 +136,31 @@ body.light-theme .top-bar {
     width: 100%;
     border-right: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    max-height: none;
-    overflow-y: auto;
+    max-height: 70vh; /* Limit height to allow scrolling */
+    overflow-y: auto; /* Enable browser scrolling */
     position: absolute;
-    top: 40px; /* Position below top bar */
+    top: 50px; /* Position below top bar */
     left: 0;
     z-index: 1000;
     background: var(--bg-secondary);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    height: auto;
     display: none; /* Initially hidden */
+    padding-top: 10px;
   }
   
   .sidebar-main.mobile-open {
     display: flex;
+    flex-direction: column;
   }
   
   .navigation {
     display: block; /* Stack navigation items vertically */
-    overflow-y: auto;
-    max-height: 70vh; /* Limit height to leave room for profile section */
+    overflow-y: auto; /* Allow browser scrolling */
+    flex: 1; /* Take available space */
   }
   
   .nav-item {
-    padding: 14px 16px; /* Larger touch targets */
+    padding: 16px 20px; /* Larger touch targets */
     margin: 4px 12px;
     font-size: 16px; /* Larger text */
     border-radius: 8px; /* More rounded corners for touch */
@@ -168,12 +169,12 @@ body.light-theme .top-bar {
   .profile-section {
     padding: 16px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    margin-top: auto; /* Push to bottom */
     display: block;
+    flex-shrink: 0; /* Don't shrink this section */
   }
   
   .user-profile {
-    padding: 10px;
+    padding: 12px;
   }
   
   .avatar {
@@ -187,7 +188,7 @@ body.light-theme .top-bar {
   
   .main-content {
     flex: 1;
-    height: calc(100vh - 50px); /* Account for increased top bar height */
+    height: calc(100vh - 50px); /* Account for top bar height */
     overflow-y: auto;
     padding-top: 16px;
   }
