@@ -190,14 +190,28 @@ body.light-theme .top-bar {
     flex: 1;
     height: calc(100vh - 50px); /* Account for top bar height */
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     padding-top: 16px;
   }
-  
+ 
   .page {
+    position: static;
+    width: 100%;
+    min-height: auto;
     padding: 16px;
+    opacity: 1;
+    transform: none;
+    visibility: visible;
   }
-  
-  .main-title {
+ 
+  .page:not(.active) {
+    display: none;
+  }
+ 
+  .page.active {
+    display: block;
+  }
+.main-title {
     font-size: 28px;
   }
   
@@ -434,15 +448,13 @@ body.light-theme .user-profile:hover {
   padding: 0;
   overflow-x: hidden; /* Prevent horizontal scroll */
   overflow-y: auto; /* Allow vertical scroll */
+  -webkit-overflow-scrolling: touch;
   background: rgba(15, 17, 26, 0.7);
   backdrop-filter: blur(10px);
   width: 100%; /* Ensure it doesn't exceed container width */
   box-sizing: border-box; /* Include padding in width calculation */
   position: relative;
   min-height: 100%;
-  overflow: hidden; /* Important for animation */
-  position: relative;
-  overflow: hidden;
 }
 
 body.light-theme .main-content {
