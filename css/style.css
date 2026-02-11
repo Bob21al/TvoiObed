@@ -33,7 +33,13 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  transition: all var(--transition-speed) var(--transition-ease);
+  transition:
+    color var(--transition-speed) var(--transition-ease),
+    background-color var(--transition-speed) var(--transition-ease),
+    border-color var(--transition-speed) var(--transition-ease),
+    box-shadow var(--transition-speed) var(--transition-ease),
+    opacity var(--transition-speed) var(--transition-ease),
+    transform var(--transition-speed) var(--transition-ease);
 }
 
 /* Specific elements can override transition if needed */
@@ -301,9 +307,20 @@ body.light-theme .top-bar {
   
   /* Adjust calendar for mobile */
   .calendar-popup {
-    width: 300px; /* Better size for mobile */
-    margin-left: -150px; /* Center the calendar */
+    position: fixed;
+    top: 50%;
     left: 50%;
+    width: min(360px, calc(100vw - 20px));
+    max-width: calc(100vw - 20px);
+    max-height: min(78vh, 460px);
+    margin: 0;
+    overflow-y: auto;
+    transform: translate(-50%, -48%) scale(0.95);
+    z-index: 11000 !important;
+  }
+
+  .calendar-popup.show {
+    transform: translate(-50%, -50%) scale(1);
   }
   
   /* Adjust custom select for mobile */
@@ -465,8 +482,8 @@ body.light-theme .main-content {
 /* Page styles with iOS animations */
 .page {
   opacity: 0;
-  transform: translateX(20px);
-  transition: all 0.4s var(--transition-ease);
+  transform: translate3d(24px, 0, 0) scale(0.985);
+  transition: opacity 0.42s var(--transition-ease), transform 0.42s var(--transition-ease), visibility 0s linear 0.42s;
   position: absolute;
   top: 0;
   left: 0;
@@ -474,14 +491,110 @@ body.light-theme .main-content {
   min-height: 100%;
   padding: 24px;
   visibility: hidden;
+  pointer-events: none;
+  will-change: transform, opacity;
 }
 
 .page.active {
   opacity: 1;
-  transform: translateX(0);
-  transition: all 0.4s var(--transition-ease);
+  transform: translate3d(0, 0, 0) scale(1);
+  transition: opacity 0.42s var(--transition-ease), transform 0.42s var(--transition-ease), visibility 0s;
   visibility: visible;
   display: block;
+  pointer-events: auto;
+}
+
+.main-content.is-switching .page {
+  pointer-events: none;
+}
+
+.page.animating-in,
+.page.animating-out {
+  visibility: visible;
+  pointer-events: none;
+}
+
+.page.animating-in.from-right {
+  opacity: 0;
+  transform: translate3d(52px, 0, 0) scale(0.985);
+}
+
+.page.animating-in.from-left {
+  opacity: 0;
+  transform: translate3d(-52px, 0, 0) scale(0.985);
+}
+
+.page.animating-in.to-center {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+.page.animating-out.to-left {
+  opacity: 0;
+  transform: translate3d(-36px, 0, 0) scale(0.992);
+}
+
+.page.animating-out.to-right {
+  opacity: 0;
+  transform: translate3d(36px, 0, 0) scale(0.992);
+}
+
+.page.active .main-title,
+.page.active h2,
+.page.active .subtitle {
+  animation: fadeInSlideUpSoft 0.46s var(--transition-ease) both;
+}
+
+.page.active .card,
+.page.active .menu-card,
+.page.active .today-widget,
+.page.active .my-order-card,
+.page.active .profile-form .form-group,
+.page.active .settings-group .switch,
+.page.active .empty-state {
+  animation: fadeInSlideUpSoft 0.5s var(--transition-ease) both;
+}
+
+.page.active .card:nth-child(1),
+.page.active .menu-card:nth-child(1),
+.page.active .profile-form .form-group:nth-child(1) { animation-delay: 0.05s; }
+.page.active .card:nth-child(2),
+.page.active .menu-card:nth-child(2),
+.page.active .profile-form .form-group:nth-child(2) { animation-delay: 0.1s; }
+.page.active .card:nth-child(3),
+.page.active .menu-card:nth-child(3),
+.page.active .profile-form .form-group:nth-child(3) { animation-delay: 0.15s; }
+.page.active .menu-card:nth-child(4),
+.page.active .profile-form .form-group:nth-child(4) { animation-delay: 0.2s; }
+.page.active .menu-card:nth-child(5) { animation-delay: 0.25s; }
+.page.active .menu-card:nth-child(6) { animation-delay: 0.3s; }
+
+@keyframes fadeInSlideUpSoft {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page,
+  .page.active,
+  .page.animating-in,
+  .page.animating-out,
+  .card,
+  .menu-card,
+  .my-order-card,
+  .big-button,
+  .add-btn,
+  .fav-btn {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
 }
 
 /* iOS-style slide transitions */
@@ -1190,7 +1303,8 @@ body.light-theme .main-content {
   position: absolute;
   top: 100%;
   left: 0;
-  width: 300px;
+  width: min(320px, calc(100vw - 24px));
+  max-width: calc(100vw - 24px);
   background: var(--bg-primary);
   border-radius: 8px;
   box-shadow: var(--shadow-hover);

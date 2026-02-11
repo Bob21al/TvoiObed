@@ -812,13 +812,68 @@ function initProfilePage() {
 
 // Page switching functionality with immediate hide then show animation
 let currentPage = 'home'; // Track current page for direction determination
+const pageOrder = ['home', 'today', 'orders', 'my-orders', 'favorites', 'profile', 'settings'];
+let isPageSwitching = false;
+let queuedPageId = null;
+let pageSwitchTimer = null;
+
+function runPageInitializers(pageId) {
+  if (pageId === 'favorites') {
+    initFavoritesPage();
+  }
+
+  if (pageId === 'today') {
+    initFavoriteButtons();
+  }
+
+  if (pageId === 'orders') {
+    updateOrdersDisplay();
+  }
+
+  if (pageId === 'my-orders') {
+    updateMyOrdersDisplay();
+  }
+
+  if (pageId === 'profile') {
+    initProfilePage();
+  }
+}
 
 function switchPage(pageId) {
   // Don't do anything if we're already on the requested page
-  if (currentPage === pageId) return;
+  if (currentPage === pageId && !isPageSwitching) return;
+
+  // If animation is in progress, queue only the last requested page
+  if (isPageSwitching) {
+    queuedPageId = pageId;
+    return;
+  }
   
   const currentPageElement = document.getElementById(`${currentPage}-page`);
   const nextPageElement = document.getElementById(`${pageId}-page`);
+  const mainContent = document.querySelector('.main-content');
+
+  if (!currentPageElement || !nextPageElement) return;
+
+  const currentIndex = pageOrder.indexOf(currentPage);
+  const nextIndex = pageOrder.indexOf(pageId);
+  const isForward = nextIndex >= currentIndex;
+  const outClass = isForward ? 'to-left' : 'to-right';
+  const inClass = isForward ? 'from-right' : 'from-left';
+  const transitionDuration = 420;
+
+  isPageSwitching = true;
+  queuedPageId = null;
+
+  // Defensive cleanup in case previous animation was interrupted
+  pages.forEach(page => {
+    page.classList.remove('animating-in', 'animating-out', 'from-right', 'from-left', 'to-center', 'to-left', 'to-right');
+  });
+
+  if (pageSwitchTimer) {
+    clearTimeout(pageSwitchTimer);
+    pageSwitchTimer = null;
+  }
   
   // Update active nav item
   navItems.forEach(item => {
@@ -834,71 +889,44 @@ function switchPage(pageId) {
       window.scrollTo(0, 0);
     }, 300);
   }
-  
-  // Immediately hide the current page
-  currentPageElement.style.visibility = 'hidden';
-  currentPageElement.classList.remove('active');
-  
-  // Prepare the next page for animation
-  nextPageElement.style.visibility = 'hidden';
-  nextPageElement.classList.remove('page-slide-enter', 'page-slide-active');
-  
-  // Force reflow to ensure classes are applied
+
+  mainContent?.classList.add('is-switching');
+
+  // Reset previous animation classes
+  currentPageElement.classList.remove('animating-in', 'from-right', 'from-left', 'to-center');
+  nextPageElement.classList.remove('animating-out', 'to-left', 'to-right');
+
+  // Prepare next page start state
+  nextPageElement.classList.remove('active');
+  nextPageElement.classList.add('animating-in', inClass);
+
+  // Animate current page out
+  currentPageElement.classList.add('animating-out', outClass);
+
+  // Force reflow before moving next page to center
   void nextPageElement.offsetWidth;
-  
-  // Show the next page with animation
-  nextPageElement.style.visibility = 'visible';
-  nextPageElement.classList.add('page-slide-enter');
-  
-  // Force reflow to ensure classes are applied
-  void nextPageElement.offsetWidth;
-  
-  // Start the enter animation
-  nextPageElement.classList.remove('page-slide-enter');
-  nextPageElement.classList.add('page-slide-active');
-  
-  // After the enter animation completes, finalize
-  setTimeout(() => {
-    // Clean up animation classes
-    currentPageElement.classList.remove('page-slide-exit');
-    nextPageElement.classList.remove('page-slide-enter', 'page-slide-active');
-    
-    // Update active states
-    currentPageElement.classList.remove('active');
+  nextPageElement.classList.add('to-center');
+
+  // After animation completes, finalize
+  pageSwitchTimer = setTimeout(() => {
+    currentPageElement.classList.remove('active', 'animating-out', 'to-left', 'to-right');
+    nextPageElement.classList.remove('animating-in', 'from-right', 'from-left', 'to-center');
     nextPageElement.classList.add('active');
-    
-    // Hide the previous page after animation completes
-    currentPageElement.style.visibility = 'hidden';
-    
-    // Update current page
+
     currentPage = pageId;
-    
-    // Initialize page-specific functionality
-    // Initialize favorites page if it's being shown
-    if (pageId === 'favorites') {
-      initFavoritesPage();
+    mainContent?.classList.remove('is-switching');
+    isPageSwitching = false;
+    pageSwitchTimer = null;
+
+    runPageInitializers(pageId);
+
+    // Process queued click (last one wins)
+    if (queuedPageId && queuedPageId !== currentPage) {
+      const nextQueued = queuedPageId;
+      queuedPageId = null;
+      switchPage(nextQueued);
     }
-    
-    // Initialize favorite buttons when going to today's menu
-    if (pageId === 'today') {
-      initFavoriteButtons();
-    }
-    
-    // Initialize orders page when shown
-    if (pageId === 'orders') {
-      updateOrdersDisplay();
-    }
-    
-    // Initialize my orders page when shown
-    if (pageId === 'my-orders') {
-      updateMyOrdersDisplay();
-    }
-    
-    // Initialize profile page when shown
-    if (pageId === 'profile') {
-      initProfilePage();
-    }
-  }, 250); // Match the CSS transition duration
+  }, transitionDuration);
 }
 
 // Add event listeners to home page cards
